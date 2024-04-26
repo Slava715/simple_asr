@@ -16,6 +16,6 @@ python3 test_1.py --in_file test_en.wav --speed 1.5
 
 python3 test_1.py --in_file test_ru.wav --volume 1.5
 
-python3 test_2.py --in_file test_en.wav --asr_url http://0.0.0.0:2600/asr_file
+python3 test_2.py --in_file test_en.wav --asr_url http://localhost:2600/asr_file
 
-python3 test_2.py --in_file test_ru.wav --asr_url http://0.0.0.0:2600/asr_file
+python3 test_2.py --in_file test_ru.wav --asr_url http://localhost:2600/asr_file
