@@ -15,4 +15,4 @@ RUN pip3 install -r ./requirements.txt
 
 EXPOSE 2600
 
-CMD gunicorn -w 1 -k uvicorn.workers.UvicornWorker app:app --preload --bind 0.0.0.0:2600 --timeout 60
+CMD gunicorn -w 4 -k uvicorn.workers.UvicornWorker app:app --preload --bind 0.0.0.0:2600 --timeout 60
