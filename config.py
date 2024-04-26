@@ -3,6 +3,7 @@ SAMPLE_RATE = 16000
 TOKEN_OFFSET = 100
 TIME_STEP = 0.04
 NUM_WORKERS = 1
+DELAY_WORKER = 0.001
 
 
 MODEL_RU = "stt_ru_conformer_ctc_large.nemo"
