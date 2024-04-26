@@ -8,7 +8,7 @@ Simple multi language asr based on Nvidia nemo framework and Siero punctuations 
 
 * sudo docker build -t simple_asr .
 
-* sudo docker run simple_asr -p 2600:2600
+* sudo docker run -p 2600:2600 simple_asr
 
 There are also several tests
 
