@@ -58,17 +58,13 @@ def init_asr(model_path):
     return model
 
 def asr_audio(frame):
-    try:
-        length = torch.FloatTensor([frame.shape[0]])
+    length = torch.FloatTensor([frame.shape[0]])
 
-        input_signal = torch.unsqueeze(frame, 0)
-        
-        log_probs, _, _ = initresult.forward(input_signal=input_signal.to( config.DEVICE), input_signal_length=length.to( config.DEVICE))
-        
-        return log_probs[0].detach().cpu().numpy()
+    input_signal = torch.unsqueeze(frame, 0)
     
-    except Exception as e:
-        print("!! Err : ", e)
+    log_probs, _, _ = initresult.forward(input_signal=input_signal.to( config.DEVICE), input_signal_length=length.to( config.DEVICE))
+    
+    return log_probs[0].detach().cpu().numpy()
 
 
 def init_lang(model_path):
@@ -78,32 +74,22 @@ def init_lang(model_path):
     return model
 
 def get_lang(frame):
-    try:
-        length = torch.FloatTensor([frame.shape[0]])
-        
-        input_signal = torch.unsqueeze(frame, 0)
-        
-        logits, _ = initresult.forward(input_signal=input_signal.to( config.DEVICE), input_signal_length=length.to( config.DEVICE))
-        
-        label_id = int(logits.argmax())
-        
-        return initresult._cfg['train_ds']['labels'][label_id]
-        
-    except Exception as e:
-        print("!! Err : ", e)
+    length = torch.FloatTensor([frame.shape[0]])
+    
+    input_signal = torch.unsqueeze(frame, 0)
+    
+    logits, _ = initresult.forward(input_signal=input_signal.to( config.DEVICE), input_signal_length=length.to( config.DEVICE))
+    
+    label_id = int(logits.argmax())
+    
+    return initresult._cfg['train_ds']['labels'][label_id]
 
 
 def init_punct(model_path):
     return torch.package.PackageImporter(model_path).load_pickle("te_model", "model")
 
 def get_punct(data):
-    try:
-        text = initresult.enhance_text(data[0], lan=data[1])
-        
-    except Exception as e:
-        print("!! Err : ", e)
-        
-    return text
+    return initresult.enhance_text(data[0], lan=data[1])
 
 
 pool_ru = ProcessPoolExecutor(config.NUM_WORKERS)
@@ -142,7 +128,6 @@ async def asr_file_raw(request: Request):
     try:
         raw_file = await request.body()
         frame = torch.FloatTensor(preproces_data(raw_file))
-        print(len(frame))
         text, result = asr_data(frame)
         
     except Exception as e:
