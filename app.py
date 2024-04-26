@@ -125,7 +125,10 @@ def asr_data(frame):
         
     text = pool_punct.submit(initwrapper, init_punct, (config.MODEL_PUNCT,), get_punct, (transcript, lang)).result()
     
-    return number_extractor.replace_num(text, apply_regrouping=True), norm_ts(raw_ts)
+    if lang == "ru":
+        text = number_extractor.replace_num(text, apply_regrouping=True)
+    
+    return text, norm_ts(raw_ts)
     
     
 import uvicorn
