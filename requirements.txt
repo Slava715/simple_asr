@@ -1,0 +1,12 @@
+pyctcdecode
+kenlm
+
+fastapi
+uvicorn[standard]
+gunicorn
+
+torch
+torchaudio
+
+natasha==0.10.0
+yargy==0.12.0
